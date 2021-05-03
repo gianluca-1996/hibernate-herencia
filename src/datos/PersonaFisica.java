@@ -2,7 +2,6 @@ package datos;
 
 public class PersonaFisica extends Cliente{
 
-	private int idPersonaFisica;
 	private String apellido;
 	private String nombre;
 	private int dni;
@@ -15,16 +14,6 @@ public class PersonaFisica extends Cliente{
 		this.apellido = apellido;
 		this.nombre = nombre;
 		this.dni = dni; 	
-	}
-	
-	public int getIdPersonaFisica()
-	{
-		return this.idPersonaFisica;
-	}
-	
-	protected void setIdPersonaFisica(int idPersonaFisica)
-	{
-		this.idPersonaFisica = idPersonaFisica;
 	}
 
 	public String getApellido() {
@@ -53,7 +42,7 @@ public class PersonaFisica extends Cliente{
 
 	@Override
 	public String toString() {
-		return "PersonaFisica [idPersonaFisica=" + idPersonaFisica + ", Nro. cliente=" + this.getNroCliente() + ", apellido=" + apellido + ", nombre=" + nombre
+		return "PersonaFisica [idPersonaFisica=" + getIdCliente() + ", Nro. cliente=" + this.getNroCliente() + ", apellido=" + apellido + ", nombre=" + nombre
 				+ ", dni=" + dni + "]";
 	}
 	

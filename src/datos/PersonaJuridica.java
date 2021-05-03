@@ -2,7 +2,6 @@ package datos;
 
 public class PersonaJuridica extends Cliente{
 
-	private int idPersonaJuridica;
 	private String razonSocial;
 	private String cuit;
 	
@@ -13,14 +12,6 @@ public class PersonaJuridica extends Cliente{
 		super(nroCliente);
 		this.razonSocial = razonSocial;
 		this.cuit = cuit;
-	}
-
-	public int getIdPersonaJuridica() {
-		return idPersonaJuridica;
-	}
-
-	public void setIdPersonaJuridica(int idPersonaJuridica) {
-		this.idPersonaJuridica = idPersonaJuridica;
 	}
 
 	public String getRazonSocial() {
@@ -41,7 +32,7 @@ public class PersonaJuridica extends Cliente{
 
 	@Override
 	public String toString() {
-		return "PersonaJuridica [idPersonaJuridica=" + idPersonaJuridica + 
+		return "PersonaJuridica [idPersonaJuridica=" + getIdCliente() + 
 				", Nro. cliente =" + this.getNroCliente() + ", razonSocial=" + razonSocial + ", cuit="
 				+ cuit + "]";
 	}

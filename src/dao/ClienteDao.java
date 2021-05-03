@@ -1,10 +1,15 @@
 package dao;
 
 import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import datos.Cliente;
+import datos.InscripcionAfip;
+import datos.PersonaFisica;
+import datos.PersonaJuridica;
 
 public class ClienteDao {
 	
@@ -34,6 +39,10 @@ public class ClienteDao {
 		throw new HibernateException("ERROR en la capa de acceso a datos", he);
 	}
 	
+	/*
+	 * EN ESTE METODO SE RECUPERA EL OBJETO 
+	 * Y EN CASO DE EXISTIR SE INICIALIZAN
+	 * SU CONTACTO E INSCRIPCIONESAFIP*/
 	public Cliente traer(int idCliente)
 	{
 		Cliente objeto = null;
@@ -42,7 +51,15 @@ public class ClienteDao {
 		{
 			iniciaOperacion();
 			objeto = (Cliente) session.createQuery("from Cliente c where c.idCliente =" 
-			+ idCliente);
+			+ idCliente).uniqueResult();
+			
+			if(objeto != null)
+			{
+				Hibernate.initialize(objeto.getContacto());
+				
+				for(InscripcionAfip afip : objeto.getInscripcionAfip())
+					Hibernate.initialize(afip);
+			}
 		}finally
 		{
 			session.close();
@@ -68,6 +85,22 @@ public class ClienteDao {
 		return lista;
 	}
 	
+	public void agregar(Cliente cliente) throws Exception
+	{	
+		try
+		{
+			iniciaOperacion();
+			session.save(cliente);
+			tx.commit();
+		}	catch(HibernateException he) {
+				manejaException(he);
+				throw he;
+			}
+			
+			finally {
+				session.close();
+			}
+	}
 }
 
 
